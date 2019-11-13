@@ -8,7 +8,7 @@ $ yarn
 $ cd ios
 $ pod install
 $ cd ..
-$ npm start
+$ react-native run-android (android) or react-native run-ios (ios)
 
 Run project from iOS and android editors
 
