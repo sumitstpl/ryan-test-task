@@ -9,15 +9,14 @@ import ImagePreviewContainer from '../components/imagePreviewComponent/ImagePrev
 
 const StackNavigator = createStackNavigator(
   {
-    SplashScreen: { screen: SplashScreen },
+    SplashScreen: { screen: SplashScreen, navigationOptions: { header: null }},
     Home: { screen: HomeContainer },
     UserDetailsContainer: { screen: UserDetailsContainer },
     ImagePreview: { screen: ImagePreviewContainer }
 
   },
   {
-    initialRouteName: 'SplashScreen',
-    headerMode: 'none',
+    initialRouteName: 'SplashScreen'
   }
 );
 export default createAppContainer(StackNavigator);

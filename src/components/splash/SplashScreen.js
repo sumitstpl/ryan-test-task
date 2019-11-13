@@ -1,22 +1,23 @@
-import React, { useEffect } from 'react';
-import { Text, View, Image } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './SplashScreenStyle';
 import NavigationService from '../../services/navigationService';
 
-function SplashScreen(props) {
-  useEffect(() => {
+class SplashScreen extends Component {
+  componentWillMount() {
     setTimeout(() => {
-      const { navigation } = props;
+      const { navigation } = this.props;
       NavigationService.navigateAndReset('Home', navigation);
     }, 1000);
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}> Ryan Test Task </Text>
-    </View>
-  );
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}> Ryan Test Task </Text>
+      </View>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({});

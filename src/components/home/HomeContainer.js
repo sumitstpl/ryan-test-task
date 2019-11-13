@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import HomeComponent from './HomeComponent';
 import { getUserData } from '../../actions/commonActions';
 
-class HomeTabContainer extends Component {
+class HomeContainer extends Component {
   static navigationOptions = {
-    title: 'Home',
+    title: 'HOME',
+    headerTintColor: 'black',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    }
   };
 
   constructor(props) {
@@ -32,4 +36,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HomeTabContainer);
+)(HomeContainer);
