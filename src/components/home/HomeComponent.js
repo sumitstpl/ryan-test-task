@@ -13,7 +13,7 @@ var searchResult = [];
 export default class HomeComponent extends Component {
   constructor(props) {
     super(props);
-      this.state = {
+    this.state = {
       searchText: '',
       page: 1,
     };
@@ -50,25 +50,25 @@ export default class HomeComponent extends Component {
 
 
   onSubmitProduct(query) {
-    this.setState({ searchText: query});
+    this.setState({ searchText: query });
     const { page } = this.state;
     console.log('@@@ product============', query);
     this.getUserData(query, page);
   }
 
-  renderCell({item}) {
+  renderCell({ item }) {
     return (
       <TouchableOpacity activeOpacity={0.8} style={styles.rowViewContainer} onPress={() => this.props.navigation.navigate('UserDetailsContainer', { selectedUserData: item })}>
         <View style={styles.subContent}>
           <FastImage
-              style={styles.imageStyle}
-              source={{
-                  uri: item.profile_image.small,
-                  headers: { Authorization: 'someAuthToken' },
-                  priority: FastImage.priority.high,
-              }}
-              resizeMode={FastImage.resizeMode.contain}
-              style={styles.userImg}
+            style={styles.imageStyle}
+            source={{
+              uri: item.profile_image.small,
+              headers: { Authorization: 'someAuthToken' },
+              priority: FastImage.priority.high,
+            }}
+            resizeMode={FastImage.resizeMode.contain}
+            style={styles.userImg}
           />
           <Text style={styles.usrNameTxt}>{item.first_name}</Text>
         </View>
@@ -91,7 +91,7 @@ export default class HomeComponent extends Component {
   }
 
   render() {
-    const { searchText  } = this.state;
+    const { searchText } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.searchContainer}>
@@ -110,17 +110,24 @@ export default class HomeComponent extends Component {
         </View>
         <View style={styles.listContainer}>
           <View>
-            <FlatList
-              keyExtractor={(item, index) => index.toString()}
-              data={searchResult.results}
-              renderItem={(item) => this.renderCell(item)}
-              showsVerticalScrollIndicator={false}
-              ItemSeparatorComponent={this.FlatListItemSeparator}
-              showsHorizontalScrollIndicator={false}
-              extraData={this.state}
-              onEndReachedThreshold={0.1}
-              onEndReached={() => this.handleLoadMore()}
-            />
+            {
+              searchResult.results === 0 ?
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ color : '#000' }}>"User images not found"</Text>
+                </View>
+                :
+                <FlatList
+                  keyExtractor={(item, index) => index.toString()}
+                  data={searchResult.results}
+                  renderItem={(item) => this.renderCell(item)}
+                  showsVerticalScrollIndicator={false}
+                  ItemSeparatorComponent={this.FlatListItemSeparator}
+                  showsHorizontalScrollIndicator={false}
+                  extraData={this.state}
+                  onEndReachedThreshold={0.1}
+                  onEndReached={() => this.handleLoadMore()}
+                />
+            }
           </View>
         </View>
       </View>
