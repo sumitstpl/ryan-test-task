@@ -44,7 +44,7 @@ export default StyleSheet.create({
     height: scale(50),
     fontSize: scale(20),
     marginHorizontal: scale(35),
-    color: CONST.GREY_DARK,
+    color: CONST.BLACK_COLOR,
   },
   searchIcon: {
     position: CONST.POSITION_ABSOLUTE,
