@@ -25,12 +25,12 @@ export default class ImagePreviewComponent extends Component {
     };
   }
 
-
-
   render() {
     return (
       <View style={styles.container}>
         <SliderBox
+          ref={c => (this._slider = c)}
+          currentIndex={this.props.selectedItem}
           ImageComponent={FastImage}
           sliderBoxHeight={height}
           images={this.state.imageArray}
