@@ -1,6 +1,7 @@
 import { StyleSheet, Platform } from 'react-native';
 import ApplicationStyles from '../../theme/applicationStyles';
 import scale, { verticalScale } from '../../utils/scale';
+import Metrics from '../../utils/Dimensions';
 import * as CONST from '../../utils/constants';
 
 export default StyleSheet.create({
@@ -80,6 +81,18 @@ export default StyleSheet.create({
   productDetailContainer: {
     marginHorizontal: 20
   },
+  usrNameTxt: {
+    fontSize: scale(16),
+    color: CONST.GREY_COLOR,
+    textAlign: 'center',
+    left: scale(10),
+    top: verticalScale(10)
+  },
+  userImg: {
+    width: 44,
+    height: 44,
+    borderRadius: 44 / 2,
+  },
   nameContainer: {
     flexDirection: CONST.ROW,
     justifyContent: CONST.SPACE_BETWEEN,
@@ -108,5 +121,24 @@ export default StyleSheet.create({
   },
   loadMore: {
     alignSelf: CONST.CENTER
+  },
+  subContent: {
+    flexDirection: 'row',
+    marginLeft: scale(20)
+  },
+  content: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: verticalScale(10)
+  },
+  img: {
+    alignSelf: 'center'
+  },
+  rowViewContainer: {
+    width: Metrics.screenWidth * 0.85,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: verticalScale(50),
+    marginVertical: verticalScale(5)
   }
 });
