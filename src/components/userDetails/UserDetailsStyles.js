@@ -32,8 +32,8 @@ export default StyleSheet.create({
   flatListStyle: {
     flex: 1,
     flexDirection: CONST.ROW,
-    marginLeft: scale(-2),
-    marginRight: scale(-2),
+    marginLeft: scale(2),
+    marginRight: scale(2),
   },
   imageItemStyle: {
     flex: 1,
@@ -42,6 +42,6 @@ export default StyleSheet.create({
   imageStyle: {
     margin: scale(2),
     width: scale(100),
-    height: verticalScale(100)
+    height: scale(100)
   }
 });

@@ -21,8 +21,7 @@ export default class HomeComponent extends Component {
 
   async getUserData(query, page) {
     searchResult = await this.props.getUserData(query, page);
-    // this.setState({ searchResult: data })
-    console.log('data==========',searchResult);
+    console.log('data==========', searchResult);
   }
 
   onPressFilter() {
