@@ -12,8 +12,9 @@ class ImagePreviewContainer extends Component {
   }
 
   render() {
+    const { selectedItem, imageData } = this.props.navigation.state.params;
     return (
-      <ImagePreviewComponent {...this.props} />
+      <ImagePreviewComponent selectedItem={selectedItem} imageData={imageData} />
     );
   }
 }

@@ -27,13 +27,17 @@ export default class UserDetailsComponent extends Component {
     return { length: itemHeight, offset: itemHeight * index, index }
   }
 
-  onItemPressed(item) {
-    console.log('Pressed ####', item);
+  onItemPressed(item, index) {
+    console.log('Pressed ####', index);
+    const imageData = this.props.userDetails.photos
+    this.props.navigation.navigate('ImagePreview', { selectedItem: index, imageData: imageData });
+
   }
 
-  _renderItem = ({ item }) => {
+  _renderItem = ({ item, index }) => {
+    console.log('@urls', item.urls.small)
     return (
-      <TouchableOpacity style={styles.imageItemStyle} onPress={() => this.onItemPressed(item)} activeOpacity={0.8}>
+      <TouchableOpacity style={styles.imageItemStyle} onPress={() => this.onItemPressed(item, index)} activeOpacity={0.8}>
         <FastImage
           style={styles.imageStyle}
           source={{
@@ -63,7 +67,7 @@ export default class UserDetailsComponent extends Component {
       <View style={styles.userImagesViewContainer}>
         {
           imageData.length === 0 ?
-            <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
               <Text>"User images not found"</Text>
             </View>
             :
