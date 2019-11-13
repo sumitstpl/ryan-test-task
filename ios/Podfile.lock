@@ -382,4 +382,8 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: eed5f3d86d5257ac815c85e775637dd0db044b1f
 
+<<<<<<< HEAD
 COCOAPODS: 1.8.4
+=======
+COCOAPODS: 1.8.3
+>>>>>>> Image Preview screen
