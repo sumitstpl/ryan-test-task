@@ -3,7 +3,6 @@ import {
   View, Text, FlatList, Image, TouchableOpacity, TextInput, ActivityIndicator
 } from 'react-native';
 import NavigationService from '../../services/navigationService';
-import * as CONST from '../../utils/constants';
 import Metrics from '../../utils/Dimensions';
 import styles from './HomeStyles';
 import images from '../../theme/images';
@@ -21,7 +20,6 @@ export default class HomeComponent extends Component {
 
   async getUserData(query, page) {
     searchResult = await this.props.getUserData(query, page);
-    console.log('data==========', searchResult);
   }
 
   onPressFilter() {
@@ -38,21 +36,9 @@ export default class HomeComponent extends Component {
     this.setState({ page: 1 });
   }
 
-  handleLoadMore = () => {
-    // if (this.state.page < 2 && this.state.searchText.length === 0) {
-    //   this.setState({
-    //     page: this.state.page + 1
-    //   }, () => {
-    //     // this.props.getAllProducts(this.state.page, this.props.filterObject);
-    //   });
-    // }
-  };
-
-
   onSubmitProduct(query) {
     this.setState({ searchText: query });
     const { page } = this.state;
-    console.log('@@@ product============', query);
     this.getUserData(query, page);
   }
 
@@ -102,9 +88,7 @@ export default class HomeComponent extends Component {
             value={searchText}
             autoCapitalize="none"
             onChangeText={(text) => this.onSubmitProduct(text)}
-            // onChangeText={(searchText) => { this.setState({ searchText }); }}
-            // onSubmitEditing={() => this.onSubmitProduct()}
-            keyboardType="email-address"
+            keyboardType="default"
             style={styles.searchInput}
           />
         </View>
@@ -124,8 +108,7 @@ export default class HomeComponent extends Component {
                   ItemSeparatorComponent={this.FlatListItemSeparator}
                   showsHorizontalScrollIndicator={false}
                   extraData={this.state}
-                  onEndReachedThreshold={0.1}
-                  onEndReached={() => this.handleLoadMore()}
+                  keyboardShouldPersistTaps='handled'
                 />
             }
           </View>

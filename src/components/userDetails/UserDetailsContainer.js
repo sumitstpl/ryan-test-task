@@ -36,13 +36,10 @@ class UserDetailsContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  //message: state.UserLoginReducer.message,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // userLogout: () => {
-  //   return dispatch(userActions.userLogout());
-  // },
+  
 });
 
 export default connect(

@@ -17,20 +17,6 @@ export default StyleSheet.create({
     height: scale(50),
     marginTop: scale(10)
   },
-  notificationIcon: {
-    marginLeft: 10
-  },
-  cartIcon: {
-    marginRight: 10
-  },
-  cartsIcon: {
-    // width: scale(25),
-    // height: scale(25)
-  },
-  notiIcon: {
-    // width: scale(30),
-    // height: scale(30)
-  },
   searchContainer: {
     marginTop: 10,
     borderWidth: 1,
@@ -46,41 +32,6 @@ export default StyleSheet.create({
     marginHorizontal: scale(35),
     color: CONST.BLACK_COLOR,
   },
-  searchIcon: {
-    position: CONST.POSITION_ABSOLUTE,
-    top: 15,
-    left: 10,
-  },
-  filterIcon: {
-    position: CONST.POSITION_ABSOLUTE,
-    top: 15,
-    right: 10,
-  },
-  dotIcon: {
-    marginTop: Platform.OS === CONST.PLATFORM_IOS ? 0 : 10,
-    padding: scale(20)
-  },
-  cellContainer: {
-    marginTop: scale(100),
-    marginHorizontal: 15,
-    borderWidth: 1,
-    borderColor: CONST.LIGHT_GREY_BG,
-    borderRadius: 10,
-    marginBottom: 20,
-    paddingTop: scale(100),
-    paddingBottom: scale(20),
-    backgroundColor: CONST.WHITE_COLOR
-  },
-  productImage: {
-    alignSelf: CONST.CENTER,
-    position: CONST.POSITION_ABSOLUTE,
-    top: scale(-80),
-    height: verticalScale(150),
-    width: scale(40)
-  },
-  productDetailContainer: {
-    marginHorizontal: 20
-  },
   usrNameTxt: {
     fontSize: scale(16),
     color: CONST.GREY_COLOR,
@@ -93,34 +44,10 @@ export default StyleSheet.create({
     height: 44,
     borderRadius: 44 / 2,
   },
-  nameContainer: {
-    flexDirection: CONST.ROW,
-    justifyContent: CONST.SPACE_BETWEEN,
-    alignItems: CONST.CENTER
-  },
-  productName: {
-    color: CONST.GREY_DARK,
-    fontSize: scale(20),
-  },
   listContainer: {
     flex: 1,
     marginTop: scale(10),
     marginBottom: scale(10)
-  },
-  productPrice: {
-    marginTop: 15,
-    color: CONST.PRIMARY_COLOR,
-    fontSize: scale(18),
-  },
-  productDescription: {
-    width: scale(200),
-    marginTop: 15,
-    textAlign: 'justify',
-    color: CONST.GREY_DARK,
-    fontSize: scale(15),
-  },
-  loadMore: {
-    alignSelf: CONST.CENTER
   },
   subContent: {
     flexDirection: 'row',

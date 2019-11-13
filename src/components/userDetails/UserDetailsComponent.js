@@ -3,9 +3,6 @@ import { View, Image, Text, FlatList, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styles from './UserDetailsStyles';
 
-const getImageUrl = (id, width, height) =>
-  `https://unsplash.it/${width}/${height}?image=${id}`
-
 export default class UserDetailsComponent extends Component {
   constructor(props) {
     super(props);
@@ -35,13 +32,11 @@ export default class UserDetailsComponent extends Component {
   }
 
   _renderItem = ({ item }) => {
-    console.log('@urls', item.urls.small)
     return (
       <TouchableOpacity style={styles.imageItemStyle} onPress={() => this.onItemPressed(item)} activeOpacity={0.8}>
         <FastImage
           style={styles.imageStyle}
           source={{
-            // uri,
             uri: item.urls.small,
             headers: { Authorization: 'someAuthToken' },
             priority: FastImage.priority.high,
@@ -64,7 +59,6 @@ export default class UserDetailsComponent extends Component {
 
   renderUserImagesView() {
     const imageData = this.props.userDetails.photos
-    console.log('@images data', imageData)
     return (
       <View style={styles.userImagesViewContainer}>
         {
