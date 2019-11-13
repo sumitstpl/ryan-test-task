@@ -8,7 +8,7 @@ function SplashScreen(props) {
   useEffect(() => {
     setTimeout(() => {
       const { navigation } = props;
-      NavigationService.navigateAndReset('UserDetailsContainer', navigation);
+      NavigationService.navigateAndReset('Home', navigation);
     }, 1000);
   }, []);
 

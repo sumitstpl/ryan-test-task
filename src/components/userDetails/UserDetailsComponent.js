@@ -58,7 +58,8 @@ onItemPressed(item) {
           <FastImage
               style={styles.imageStyle}
               source={{
-                  uri,
+                  // uri,
+                  uri: item.urls.full,
                   headers: { Authorization: 'someAuthToken' },
                   priority: FastImage.priority.high,
               }}
@@ -69,22 +70,24 @@ onItemPressed(item) {
 }
 
   renderProfileHeader() {
+    const { first_name, last_name, profile_image } = this.props.userDetails;
     return (
         <View style={styles.profileHeaderContainer}>
-            <Image style={styles.userProfileStyle} source={{uri: 'https://unsplash.it/400/400?image=1'}} />
-            <Text style={styles.userNameText}> Kapil Kolte</Text>
+            <Image style={styles.userProfileStyle} source={{uri: profile_image.medium}} />
+            <Text style={styles.userNameText}>{`${first_name} ${last_name}`}</Text>
         </View>
     );
 }
 
 renderUserImagesView() {
+  const imageData = this.props.userDetails.photos
   return (
     <View style={styles.userImagesViewContainer}>
       <FlatList
           onLayout={this._onLayout}
           style={{ flex: 1 }}
           columnWrapperStyle={[styles.flatListStyle,{ height: this.state.itemHeight},]}
-          data={this.state.images}
+          data={imageData}
           renderItem={this._renderItem}
           numColumns={4}
           keyExtractor={this._extractKey}

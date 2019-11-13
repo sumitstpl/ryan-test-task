@@ -36,6 +36,10 @@ export default class HomeComponent extends Component {
   async getUserData() {
     const data = await this.props.getUserData('prashant', 1);
     console.log('data==========', data);
+    const { navigation } = this.props;
+    NavigationService.navigate('UserDetailsContainer', {
+      userData: data.results[0]
+    });
   }
   onPressFilter() {
     if (this.state.searchText.length !== 0) {

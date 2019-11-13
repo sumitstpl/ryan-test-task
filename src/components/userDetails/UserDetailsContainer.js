@@ -20,8 +20,9 @@ class UserDetailsContainer extends Component {
   }
 
   render() {
+    const { userData } = this.props.navigation.state.params;
     return (
-      <UserDetailsComponent {...this.props} />
+      <UserDetailsComponent {...this.props} userDetails={userData}/>
     );
   }
 }
