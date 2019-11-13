@@ -7,36 +7,24 @@ import * as CONST from '../../utils/constants';
 import Metrics from '../../utils/Dimensions';
 import styles from './HomeStyles';
 import images from '../../theme/images';
+import FastImage from 'react-native-fast-image';
 
+var searchResult = [];
 export default class HomeComponent extends Component {
   constructor(props) {
     super(props);
-    
-    this.getUserData();
-    this.state = {
+      this.state = {
       searchText: '',
       page: 1,
-      data: [
-        {
-          id: 0,
-          name: 'john deo',
-          image: 'https://dummyimage.com/300/09f/fff.png'
-
-        },
-        {
-          id: 1,
-          name: 'john deo',
-          image: 'https://dummyimage.com/300/09f/fff.png'
-
-        }
-      ]
     };
   }
 
-  async getUserData() {
-    const data = await this.props.getUserData('prashant', 1);
-    console.log('data==========', data);
+  async getUserData(query, page) {
+    searchResult = await this.props.getUserData(query, page);
+    // this.setState({ searchResult: data })
+    console.log('data==========',searchResult);
   }
+
   onPressFilter() {
     if (this.state.searchText.length !== 0) {
       this.setState({ searchText: '', page: 1 }, () => {
@@ -62,16 +50,28 @@ export default class HomeComponent extends Component {
   };
 
 
-  onSubmitProduct() {
-    console.log('@@@ product============', this.state.searchText);
+  onSubmitProduct(query) {
+    this.setState({ searchText: query});
+    const { page } = this.state;
+    console.log('@@@ product============', query);
+    this.getUserData(query, page);
   }
 
   renderCell({item}) {
     return (
-      <TouchableOpacity activeOpacity={0.8} style={styles.rowViewContainer} onPress={() => this.props.navigation.navigate('AthleteTimelineScreen', { id: item.id })}>
+      <TouchableOpacity activeOpacity={0.8} style={styles.rowViewContainer} onPress={() => this.props.navigation.navigate('UserDetailsContainer', { selectedUserData: item })}>
         <View style={styles.subContent}>
-          <Image source={{ uri: item.image }} style={styles.userImg} />
-          <Text style={styles.usrNameTxt}>{item.name}</Text>
+          <FastImage
+              style={styles.imageStyle}
+              source={{
+                  uri: item.profile_image.small,
+                  headers: { Authorization: 'someAuthToken' },
+                  priority: FastImage.priority.high,
+              }}
+              resizeMode={FastImage.resizeMode.contain}
+              style={styles.userImg}
+          />
+          <Text style={styles.usrNameTxt}>{item.first_name}</Text>
         </View>
         <Image source={images.arrow} style={styles.img} />
       </TouchableOpacity>
@@ -92,7 +92,7 @@ export default class HomeComponent extends Component {
   }
 
   render() {
-    const { searchText, data } = this.state;
+    const { searchText  } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.searchContainer}>
@@ -102,8 +102,9 @@ export default class HomeComponent extends Component {
             placeholder="Search users"
             value={searchText}
             autoCapitalize="none"
-            onChangeText={(searchText) => { this.setState({ searchText }); }}
-            onSubmitEditing={() => this.onSubmitProduct()}
+            onChangeText={(text) => this.onSubmitProduct(text)}
+            // onChangeText={(searchText) => { this.setState({ searchText }); }}
+            // onSubmitEditing={() => this.onSubmitProduct()}
             keyboardType="email-address"
             style={styles.searchInput}
           />
@@ -112,7 +113,7 @@ export default class HomeComponent extends Component {
           <View>
             <FlatList
               keyExtractor={(item, index) => index.toString()}
-              data={data}
+              data={searchResult.results}
               renderItem={(item) => this.renderCell(item)}
               showsVerticalScrollIndicator={false}
               ItemSeparatorComponent={this.FlatListItemSeparator}
