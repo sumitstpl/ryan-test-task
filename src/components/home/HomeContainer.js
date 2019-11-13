@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HomeComponent from './HomeComponent';
+import { getUserData } from '../../actions/commonActions';
 
 class HomeTabContainer extends Component {
   static navigationOptions = {
@@ -19,13 +20,13 @@ class HomeTabContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  //message: state.UserLoginReducer.message,
+  userData: state.commonReducer.userData,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // userLogout: () => {
-  //   return dispatch(userActions.userLogout());
-  // },
+  getUserData: (userQuery, pageCount) => {
+    return dispatch(getUserData(userQuery, pageCount));
+  },
 });
 
 export default connect(

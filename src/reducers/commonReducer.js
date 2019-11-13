@@ -4,28 +4,28 @@
  * Description: COMMON REDUCER FOR SPINNER AND MODAL!
  *
  */
+import { handleActions } from 'redux-actions';
+import * as actions from '../actions/commonActions';
 
-export const START_SPINNER = 'START_SPINNER';
-export const STOP_SPINNER = 'STOP_SPINNER';
-
-const initialState = {
+const INITIAL_STATE = {
   isFetching: false,
+  userData: []
 };
 
-// This reducer stores the state of common spinner and modal.
-export default function (state = initialState, action) {
-  switch (action.type) {
-    case START_SPINNER:
-      return {
-        ...state,
-        isFetching: true
-      };
-    case STOP_SPINNER:
-      return {
-        ...state,
-        isFetching: false
-      };
-    default:
-      return state;
-  }
-}
+
+
+export default handleActions({
+  [actions.userData]: (state, action) => ({
+    ...state,
+    userData: action.payload
+  }),
+  [actions.spinnerStart]: (state, action) => ({
+    ...state,
+    isFetching: true
+  }),
+  [actions.spinnerStop]: (state, action) => ({
+    ...state,
+    isFetching: false
+  })
+}, INITIAL_STATE);
+

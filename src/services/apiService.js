@@ -3,15 +3,12 @@
  */
 
 import { Alert } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import Config from '../config';
 import * as CONST from '../utils/constants';
-import AsyncStorageUtil from '../utils/asyncStorageUtil';
 
-// eslint-disable-next-line import/prefer-default-export
 export async function CommonFetch(params, opt) {
   try {
-    const URL = `${Config.API_URL}` + `${opt.url}`;
+    const URL = `${Config.API_URL}` + `${opt.url}`+ `&client_id=${Config.CLIENT_KEY_STAGE}`;
     const Options = {
       method: opt.method,
       URL,
@@ -26,16 +23,8 @@ export async function CommonFetch(params, opt) {
       timeout: CONST.API_TIMEOUT
     };
 
-    const sessionToken = await AsyncStorageUtil.getAsyncStorage('SESSION_TOKEN');
-    console.log('@@@ session=========', sessionToken)
     ReqOptions.headers['Accept'] = 'application/json';
     ReqOptions.headers['Content-Type'] = 'application/json';
-    
-    if (sessionToken !== undefined && sessionToken != null) {
-      ReqOptions.headers['Authorization'] = `Bearer ${sessionToken}`;
-    } else {
-      ReqOptions.headers['Authorization'] = '';
-    }
 
     if (ReqOptions.method === CONST.GET_API) {
       delete ReqOptions.body;
@@ -44,16 +33,11 @@ export async function CommonFetch(params, opt) {
     }
 
     try {
-      console.log('ReqOptions----', ReqOptions);
-
       return new Promise((Resolve, Reject) => {
         requestTimeoutPromise(ReqOptions.timeout, fetch(Options.URL, ReqOptions), Resolve, Reject);
       }).then((Response) => {
-        console.log('Api Response -----', Response);
+        console.log('Api Response: ', Response);
         if (Response.status === 200 || Response.status === 201) {
-          if (opt.url === 'v1/auth' || opt.url === 'v1/users') {
-            AsyncStorageUtil.setAsyncStorage('SESSION_TOKEN', Response.headers.map.authorization);
-          }
           return Response.json();
         } else if (Response.status === 400) { //* Not found OR Something Went Wrong
           Response.json().then((res) => {
@@ -71,7 +55,7 @@ export async function CommonFetch(params, opt) {
               return undefined;
             });
           } catch (error) {
-            console.log('error-----', error);
+            console.log('Error: ', error);
           }
         } else if (Response.status === 404) { //* Not found OR Something Went Wrong
           try {
@@ -80,7 +64,7 @@ export async function CommonFetch(params, opt) {
               return undefined;
             });
           } catch (error) {
-            console.log('error-----', error);
+            console.log('Error: ', error);
           }
         } else if (Response.status === 409) { //* Not found OR Something Went Wrong
           Response.json().then((res) => {
@@ -93,14 +77,14 @@ export async function CommonFetch(params, opt) {
         }
       })
         .catch((error) => {
-          console.log('ApiService Error1 ####', error);
+          console.log('ApiService Error: ', error);
         });
     } catch (error) {
-      console.log('ApiService Error2 ####', error);
+      console.log('ApiService Error: ', error);
       return undefined;
     }
   } catch (error) {
-    console.log('ApiService Error3 ####', error);
+    console.log('ApiService Error: ', error);
     return undefined;
   }
 }
@@ -119,12 +103,11 @@ function requestTimeoutPromise(waitingTime, promise, resoveInternal, rejectInter
         resoveInternal(res);
       },
       (resError) => {
-        console.log('Timeout Error1 ####', resError);
         clearTimeout(_timeout);
         rejectInternal('Request Timeout');
       }
     );
   } catch (error) {
-    console.log('Timeout Error2 ####', error);
+    console.log('Timeout Error', error);
   }
 }

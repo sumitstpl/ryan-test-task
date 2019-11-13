@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import NavigationService from '../../services/navigationService';
 import AppNavigator from '../../navigators/AppNavigator';
 import styles from './RootScreenStyle';
-import * as StartupActions from '../../actions/startUpActions';
 
 class RootScreen extends Component {
   constructor(props) {
@@ -30,9 +29,7 @@ class RootScreen extends Component {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({
-  startUp: () => dispatch(StartupActions.startUp()),
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(
   mapStateToProps,

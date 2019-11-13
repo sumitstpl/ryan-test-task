@@ -11,6 +11,8 @@ import images from '../../theme/images';
 export default class HomeComponent extends Component {
   constructor(props) {
     super(props);
+    
+    this.getUserData();
     this.state = {
       searchText: '',
       page: 1,
@@ -29,6 +31,24 @@ export default class HomeComponent extends Component {
         }
       ]
     };
+  }
+
+  async getUserData() {
+    const data = await this.props.getUserData('prashant', 1);
+    console.log('data==========', data);
+  }
+  onPressFilter() {
+    if (this.state.searchText.length !== 0) {
+      this.setState({ searchText: '', page: 1 }, () => {
+        this.props.getAllProducts(1);
+      });
+    } else {
+      NavigationService.navigate('FilterScreen', { resetPage: () => this.resetPage() });
+    }
+  }
+
+  resetPage() {
+    this.setState({ page: 1 });
   }
 
   handleLoadMore = () => {
