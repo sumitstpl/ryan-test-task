@@ -7,6 +7,7 @@ import Metrics from '../../utils/Dimensions';
 import styles from './HomeStyles';
 import images from '../../theme/images';
 import FastImage from 'react-native-fast-image';
+import Icon from 'react-native-vector-icons/EvilIcons'
 
 var searchResult = [];
 export default class HomeComponent extends Component {
@@ -91,6 +92,15 @@ export default class HomeComponent extends Component {
             keyboardType="default"
             style={styles.searchInput}
           />
+          <Icon
+            style={{ position: 'absolute', right: 10 }}
+            name="search"
+            size={25}
+            color="black"
+            onPress={() => {
+              this.onSubmitProduct(this.state.searchText);
+            }}
+          />  
         </View>
         <View style={styles.listContainer}>
           <View>

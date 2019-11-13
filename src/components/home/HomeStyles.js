@@ -23,6 +23,7 @@ export default StyleSheet.create({
     borderColor: CONST.BORDER_COLOR_GREY_LIGHT,
     borderRadius: 10,
     marginHorizontal: scale(10),
+    justifyContent: 'center'
   },
   searchInput: {
     justifyContent: CONST.CENTER,

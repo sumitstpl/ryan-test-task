@@ -12,7 +12,7 @@ class UserDetailsContainer extends Component {
     },
     headerLeft: (
       <Icon
-        style={{ marginLeft: 43, marginTop: 5 }}
+        style={{ marginLeft: 10, marginTop: 5 }}
         name="arrowleft"
         size={25}
         color="black"
